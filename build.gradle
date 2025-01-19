@@ -3,17 +3,16 @@ plugins {
     id('io.qameta.allure') version '2.11.2'
 }
 
-group 'ru.savrasov'
 version '1.0-SNAPSHOT'
 allure {
     report {
-        version.set("2.19.0")
+        version.set("2.27.0")
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.19.0")
+                adapterVersion.set("2.27.0")
             }
         }
     }
@@ -40,7 +39,7 @@ tasks.withType(Test) {
     useJUnitPlatform()
 }
 
-task highPriority_test(type: Test) {
+task vkusvill_test(type: Test) {
     useJUnitPlatform {
         includeTags("High")
     }
