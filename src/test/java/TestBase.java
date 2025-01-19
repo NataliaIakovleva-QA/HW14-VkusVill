@@ -12,7 +12,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 
-public class BaseTest {
+public class TestBase {
     public static final String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud");
 
     @BeforeEach
@@ -26,8 +26,6 @@ public class BaseTest {
         Configuration.remote = "https://user1:1234@" + remoteUrl + "/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", System.getProperty("browser"));
-        capabilities.setCapability("browserVersion",System.getProperty("browserVersion"));
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true

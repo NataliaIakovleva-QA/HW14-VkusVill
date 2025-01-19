@@ -42,6 +42,7 @@ tasks.withType(Test) {
 task vkusvill_test(type: Test) {
     useJUnitPlatform {
         includeTags("High")
+        includeTags("Medium")
     }
 }
 

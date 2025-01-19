@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 
-public class VkusvilTest extends BaseTest {
+public class VkusvillTestBase extends TestBase {
     Assertion assertion = new Assertion();
     MainPage mainPage = new MainPage();
 
@@ -36,7 +36,7 @@ public class VkusvilTest extends BaseTest {
 
     @DisplayName("проверить переход на страницу вакансий")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tags({@Tag("Medium"), @Tag("web")})
     void vacancysPageCheck() {
         mainPage.clickVacancys();
         assertion.textExist("Работа");
@@ -44,7 +44,7 @@ public class VkusvilTest extends BaseTest {
 
     @DisplayName("Проверить переход в корзину")
     @Test
-    @Tags({@Tag("Blocker"), @Tag("web")})
+    @Tags({@Tag("High"), @Tag("web")})
     void cartPageCheck() {
         mainPage.clickCart();
         assertion.textExist("Корзина");
