@@ -13,17 +13,17 @@ import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
-    public static final String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud");
+    public static final String REMOTE_URL = System.getProperty("remoteUrl", "selenoid.autotests.cloud");
 
     @BeforeEach
-    public void baseTest() {
+    public void testBase() {
 
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "126.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://vkusvill.ru/yar/";
-        Configuration.remote = "https://user1:1234@" + remoteUrl + "/wd/hub";
+        Configuration.remote = "https://user1:1234@" + REMOTE_URL + "/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(

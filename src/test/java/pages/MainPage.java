@@ -3,19 +3,17 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class MainPage {
-    private SelenideElement menu = $(byText("Меню")),
+    private final SelenideElement menu = $(byText("Меню")),
             catalog = $(byText("Каталог")),
             newProducts = $(byText("Новинки")),
-            recypes = $(byTagAndText("div", "Рецепты")),
-            vacancys = $(byText("Вакансии")),
+            recipes = $(byTagAndText("div", "Рецепты")),
+            vacancies = $(byText("Вакансии")),
             cart = $(byText("Корзина"));
 
     @Step("Открыть попап Меню")
@@ -37,13 +35,13 @@ public class MainPage {
     }
 
     @Step("Перейти на страницу рецептов")
-    public void clickRecypes() {
-        recypes.click();
+    public void clickRecipes() {
+        recipes.click();
     }
 
     @Step("Перейти на страницу вокансий")
-    public void clickVacancys() {
-        vacancys.click();
+    public void clickVacancies() {
+        vacancies.click();
     }
 
     @Step("Перейти в корзину")
