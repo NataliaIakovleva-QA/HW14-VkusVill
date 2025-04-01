@@ -1,9 +1,15 @@
 plugins {
     id 'java'
-    id('io.qameta.allure') version '2.11.2'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
-version '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 allure {
     report {
         version.set("2.27.0")
@@ -17,26 +23,31 @@ allure {
         }
     }
 }
+
 repositories {
     mavenCentral()
 }
-compileJava {
-    options.encoding = 'UTF-8'
-}
-compileTestJava {
+
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-    testImplementation 'com.codeborne:selenide:6.17.0'
-    testImplementation 'io.qameta.allure:allure-selenide:2.24.0'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
-    testImplementation 'org.testng:testng:7.1.0'
+    testImplementation 'com.codeborne:selenide:6.19.1'
+    testImplementation 'io.qameta.allure:allure-selenide:2.27.0'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.12'
+
 }
+
 tasks.withType(Test) {
     systemProperties(System.getProperties())
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
 }
 
 task vkusvill_test(type: Test) {
@@ -44,8 +55,4 @@ task vkusvill_test(type: Test) {
         includeTags("High")
         includeTags("Medium")
     }
-}
-
-test {
-    useJUnitPlatform()
 }

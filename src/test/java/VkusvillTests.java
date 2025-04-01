@@ -1,15 +1,15 @@
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
-import steps.Assertion;
+import steps.PageAssertHelper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 
 public class VkusvillTests extends TestBase {
-    Assertion assertion = new Assertion();
+    PageAssertHelper assertion = new PageAssertHelper();
     MainPage mainPage = new MainPage();
 
-    @DisplayName("проверить работу попапа 'Меню'")
+    @DisplayName("Проверить работу попапа 'Меню'")
     @Test
     @Tags({@Tag("High"), @Tag("web")})
     void menuPopupCheckTest() {
@@ -17,7 +17,7 @@ public class VkusvillTests extends TestBase {
         assertion.textExist("Медиа");
     }
 
-    @DisplayName("проверить работу попапа 'Каталог'")
+    @DisplayName("Проверить работу попапа 'Каталог'")
     @Test
     @Tags({@Tag("High"), @Tag("web")})
     void catalogPopupCheckTest() {
@@ -26,7 +26,7 @@ public class VkusvillTests extends TestBase {
         assertion.textExist("Новинки");
     }
 
-    @DisplayName("проверить переход на страницу рецептов")
+    @DisplayName("Проверить переход на страницу рецептов")
     @Test
     @Tags({@Tag("Medium"), @Tag("web")})
     void recipesPageCheckTest() {
@@ -34,7 +34,7 @@ public class VkusvillTests extends TestBase {
         assertion.textExist("Рецепты");
     }
 
-    @DisplayName("проверить переход на страницу вакансий")
+    @DisplayName("Проверить переход на страницу вакансий")
     @Test
     @Tags({@Tag("Medium"), @Tag("web")})
     void vacanciesPageCheckTest() {

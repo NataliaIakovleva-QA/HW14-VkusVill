@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class Assertion {
+public class PageAssertHelper {
 
 
     @Step("Проверить наличие Текста {value}")
