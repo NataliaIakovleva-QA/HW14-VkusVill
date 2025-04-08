@@ -16,6 +16,11 @@ public class NavigationHelper {
         $("#js-vv21-search__search-input").click();
         $("#js-vv21-search__search-input").setValue(productName).click();
 
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+        }
+
         ElementsCollection cards = $$(".ProductCard");
         cards.first().shouldHave(Condition.text(productName));
 
