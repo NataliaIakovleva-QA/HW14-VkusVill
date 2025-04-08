@@ -1,13 +1,16 @@
-import org.junit.jupiter.api.Test;
-import pages.MainPage;
-import steps.PageAssertHelper;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
+import com.codeborne.selenide.*;
+import org.junit.jupiter.api.*;
+import steps.MainPageHelper;
+import steps.AssertHelper;
+import steps.NavigationHelper;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class VkusvillTests extends TestBase {
-    PageAssertHelper assertion = new PageAssertHelper();
-    MainPage mainPage = new MainPage();
+    AssertHelper assertion = new AssertHelper();
+    MainPageHelper mainPage = new MainPageHelper();
+    NavigationHelper pickAddress = new NavigationHelper();
 
     @DisplayName("Проверить работу попапа 'Меню'")
     @Test
@@ -48,5 +51,42 @@ public class VkusvillTests extends TestBase {
     void cartPageCheckTest() {
         mainPage.clickCart();
         assertion.textExist("Корзина");
+    }
+
+    @Test
+    public void findAndPickProduct() {
+        SelenideElement product = pickAddress.findProduct("Молоко");
+        Assertions.assertNotNull(product);
+
+        pickAddress.pickProduct(product);
+
+        assertion.h1Exist("Молоко");
+        assertion.addShoppingCardAvailable();
+    }
+
+    @Test
+    public void testPickAddressAndDeliveryTime_viaProductDetailsScreen() {
+        SelenideElement product = pickAddress.findProduct("Молоко");
+        pickAddress.pickProduct(product);
+
+        pickAddress.pickAddress("Рыбинск, Крестовая улица, 41");
+
+        pickAddress.pickDeliveryTime();
+
+        assertion.existElementWithText(".HeaderATDToggler__Link.js-delivery__shopselect--form-show",
+                "Крестовая");
+    }
+
+    @Test
+    public void testFindShopByAddress() {
+        pickAddress.pickShops();
+        pickAddress.selectRegion("Ярославль");
+        pickAddress.selectCity("Рыбин");
+
+        assertion.numberOfElements(2, $$(".VV21_MapPanelShops__Item"));
+
+        pickAddress.selectShopByStreet("Крест");
+
+        assertion.existElementWithText(".VV21_MapPanelCard__Phone", "121-32-65");
     }
 }

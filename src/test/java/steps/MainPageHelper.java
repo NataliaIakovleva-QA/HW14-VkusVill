@@ -1,4 +1,4 @@
-package pages;
+package steps;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class MainPage {
+public class MainPageHelper {
     private final SelenideElement menu = $(byText("Меню")),
             catalog = $(byText("Каталог")),
             newProducts = $(byText("Новинки")),
@@ -22,7 +22,7 @@ public class MainPage {
     }
 
     @Step("Открыть попап Каталог")
-    public MainPage hoverCatalog() {
+    public MainPageHelper hoverCatalog() {
         catalog.hover().ancestor("div");
         return this;
 
