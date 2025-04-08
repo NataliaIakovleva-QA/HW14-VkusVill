@@ -47,13 +47,15 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить переход в корзину")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tags({@Tag("Medium"), @Tag("web")})
     void cartPageCheckTest() {
         mainPage.clickCart();
         assertion.textExist("Корзина");
     }
 
+    @DisplayName("Проверить поиск и переход на карточку продукта")
     @Test
+    @Tags({@Tag("High"), @Tag("web")})
     public void findAndPickProduct() {
         SelenideElement product = pickAddress.findProduct("Молоко");
         Assertions.assertNotNull(product);
@@ -64,7 +66,9 @@ public class VkusvillTests extends TestBase {
         assertion.addShoppingCardAvailable();
     }
 
+    @DisplayName("Проверить выбор магазина для самовывоза и времени готовности заказа через карточку продукта")
     @Test
+    @Tags({@Tag("High"), @Tag("web")})
     public void testPickAddressAndDeliveryTime_viaProductDetailsScreen() {
         SelenideElement product = pickAddress.findProduct("Молоко");
         pickAddress.pickProduct(product);
@@ -77,7 +81,9 @@ public class VkusvillTests extends TestBase {
                 "Крестовая");
     }
 
+    @DisplayName("Проверить поиск магазина по адресу")
     @Test
+    @Tags({@Tag("High"), @Tag("web")})
     public void testFindShopByAddress() {
         pickAddress.pickShops();
         pickAddress.selectRegion("Ярославль");
