@@ -1,4 +1,4 @@
-package steps;
+package helpers;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -34,7 +34,7 @@ public class AssertHelper {
 
     public void addShoppingCardAvailable() {
         $("h1").scrollTo();
-        $("button.CartButton__content").
+        $(".VV23_CartButtonContainer__Col._button").
                 $(withText("В корзину")).shouldBe(Condition.visible);
     }
 }

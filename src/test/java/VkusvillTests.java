@@ -1,20 +1,19 @@
 import com.codeborne.selenide.*;
 import org.junit.jupiter.api.*;
-import steps.MainPageHelper;
-import steps.AssertHelper;
-import steps.NavigationHelper;
+import pages.MainPage;
+import helpers.AssertHelper;
+import pages.NavigationPage;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class VkusvillTests extends TestBase {
     AssertHelper assertion = new AssertHelper();
-    MainPageHelper mainPage = new MainPageHelper();
-    NavigationHelper navigationHelper = new NavigationHelper();
+    MainPage mainPage = new MainPage();
+    NavigationPage navigationPage = new NavigationPage();
 
     @DisplayName("Проверить работу попапа 'Меню'")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tag("Medium")
     void menuPopupCheckTest() {
         mainPage.clickMenu();
         assertion.textExist("Медиа");
@@ -22,7 +21,7 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить работу попапа 'Каталог'")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tag("Medium")
     void catalogPopupCheckTest() {
         mainPage.hoverCatalog();
         mainPage.clickNewProducts();
@@ -31,7 +30,7 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить переход на страницу рецептов")
     @Test
-    @Tags({@Tag("Medium"), @Tag("web")})
+    @Tag("Medium")
     void recipesPageCheckTest() {
         mainPage.clickRecipes();
         assertion.textExist("Рецепты");
@@ -39,7 +38,7 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить переход на страницу вакансий")
     @Test
-    @Tags({@Tag("Medium"), @Tag("web")})
+    @Tag("Medium")
     void vacanciesPageCheckTest() {
         mainPage.clickVacancies();
         assertion.textExist("Работа");
@@ -47,7 +46,7 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить переход в корзину")
     @Test
-    @Tags({@Tag("Medium"), @Tag("web")})
+    @Tag("Medium")
     void cartPageCheckTest() {
         mainPage.clickCart();
         assertion.textExist("Корзина");
@@ -55,12 +54,12 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить поиск и переход на карточку продукта")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tag("High")
     public void findAndPickProduct() {
-        SelenideElement product = navigationHelper.findProduct("Молоко");
+        SelenideElement product = navigationPage.findProduct("Молоко");
         Assertions.assertNotNull(product);
 
-        navigationHelper.pickProduct(product);
+        navigationPage.pickProduct(product);
 
         assertion.h1Exist("Молоко");
         assertion.addShoppingCardAvailable();
@@ -68,14 +67,14 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить выбор магазина для самовывоза и времени готовности заказа через карточку продукта")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tag("High")
     public void testPickAddressAndDeliveryTime_viaProductDetailsScreen() {
-        SelenideElement product = navigationHelper.findProduct("Молоко");
-        navigationHelper.pickProduct(product);
+        SelenideElement product = navigationPage.findProduct("Молоко");
+        navigationPage.pickProduct(product);
 
-        navigationHelper.pickAddress("Рыбинск, Крестовая улица, 41");
+        navigationPage.pickAddress("Рыбинск, Крестовая улица, 41");
 
-        navigationHelper.pickDeliveryTime();
+        navigationPage.pickDeliveryTime();
 
         assertion.existElementWithText(".HeaderATDToggler__Link.js-delivery__shopselect--form-show",
                 "Крестовая");
@@ -83,15 +82,15 @@ public class VkusvillTests extends TestBase {
 
     @DisplayName("Проверить поиск магазина по адресу")
     @Test
-    @Tags({@Tag("High"), @Tag("web")})
+    @Tag("High")
     public void testFindShopByAddress() {
-        navigationHelper.pickShops();
-        navigationHelper.selectRegion("Ярославль");
-        navigationHelper.selectCity("Рыбин");
+        navigationPage.pickShops();
+        navigationPage.selectRegion("Ярославль");
+        navigationPage.selectCity("Рыбин");
 
         assertion.numberOfElements(2, $$(".VV21_MapPanelShops__Item"));
 
-        navigationHelper.selectShopByStreet("Крест");
+        navigationPage.selectShopByStreet("Крест");
 
         assertion.existElementWithText(".VV21_MapPanelCard__Phone", "121-32-65");
     }
