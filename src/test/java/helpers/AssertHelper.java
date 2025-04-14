@@ -34,7 +34,7 @@ public class AssertHelper {
 
     public void addShoppingCardAvailable() {
         $("h1").scrollTo();
-        $(".VV23_CartButtonContainer__Col._button").
+        $(".VV23_CartButtonContainer").
                 $(withText("В корзину")).shouldBe(Condition.visible);
     }
 }
